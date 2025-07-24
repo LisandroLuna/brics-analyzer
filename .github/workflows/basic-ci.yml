@@ -11,9 +11,9 @@ on:
 jobs:
   secretos-variables:
     runs-on: ubuntu-latest
-   steps:
+    steps:
     - name: Usar Secreto
-      run: echo ${{ secrets.PASSWORD }}
+      run: gecho ${{ secrets.PASSWORD }}
     - name: Usar Variable
       run: echo ${{ vars.LOG_LEVEL }}
 
