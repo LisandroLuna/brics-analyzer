@@ -1,11 +1,11 @@
-name: Análisis BRICS CI
+name: Análisis BRICS CI STAGING
 
 # Eventos que activan el workflow
 on:
   push:
-    branches: [ main ]
+    branches: [ staging ]
   pull_request:
-    branches: [ main ]
+    branches: [ staging ]
 
 # Trabajos a ejecutar
 jobs:
