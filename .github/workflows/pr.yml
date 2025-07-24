@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Usar Secreto
-      run: gecho ${{ secrets.PASSWORD }}
+      run: echo ${{ secrets.PASSWORD }}
     - name: Usar Variable
       run: echo ${{ vars.LOG_LEVEL }}
 
