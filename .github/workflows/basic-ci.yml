@@ -17,6 +17,14 @@ jobs:
     - name: Usar Variable
       run: echo ${{ vars.LOG_LEVEL }}
 
+  secretos-variables-v2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Usar Secreto
+      run: echo ${{ secrets.PASSWORD }}
+    - name: Usar Variable
+      run: echo ${{ vars.LOG_LEVEL }}
+
   analisis-basico:
     needs: secretos-variables
     # Runner a utilizar
