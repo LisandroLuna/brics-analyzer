@@ -11,7 +11,7 @@ on:
 jobs:
   secretos-variables:
     runs-on: ubuntu-latest
-    steps:
+   steps:
     - name: Usar Secreto
       run: echo ${{ secrets.PASSWORD }}
     - name: Usar Variable
