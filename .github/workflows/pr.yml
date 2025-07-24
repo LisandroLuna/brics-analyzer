@@ -1,0 +1,59 @@
+name: Análisis BRICS CI STAGING
+
+# Eventos que activan el workflow
+on:
+  push:
+    branches: [ staging ]
+  pull_request:
+    branches: [ staging ]
+
+# Trabajos a ejecutar
+jobs:
+  secretos-variables:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Usar Secreto
+      run: gecho ${{ secrets.PASSWORD }}
+    - name: Usar Variable
+      run: echo ${{ vars.LOG_LEVEL }}
+
+  secretos-variables-v2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Usar Secreto
+      run: echo ${{ secrets.PASSWORD }}
+    - name: Usar Variable
+      run: echo ${{ vars.LOG_LEVEL }}
+
+  analisis-basico:
+    needs: secretos-variables
+    # Runner a utilizar
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout del código fuente
+    - name: Checkout código
+      uses: actions/checkout@v4
+    
+    # Configurar Python con caché de dependencias
+    - name: Configurar Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    
+    # Instalar dependencias con versiones específicas
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install --no-cache-dir -r requirements.txt
+    
+    # Verificar instalación
+    - name: Verificar dependencias
+      run: |
+        python -c "import pandas as pd; print(f'✅ Pandas {pd.__version__}')"
+        python -c "import numpy as np; print(f'✅ NumPy {np.__version__}')"
+    
+    # Ejecutar programa
+    - name: Ejecutar análisis BRICS
+      run: python main.py
