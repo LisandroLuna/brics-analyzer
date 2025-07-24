@@ -1,11 +1,9 @@
-name: Análisis BRICS CI
+name: Deploy Análisis BRICS CI
 
 # Eventos que activan el workflow
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ main, staging ]
 
 # Trabajos a ejecutar
 jobs:
